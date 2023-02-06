@@ -1,0 +1,37 @@
+:root {
+    --clr-primary: rgb(54, 112, 199);
+    --clr-light: #f4f4f4;
+    --clr-dark: #333;
+    --clr-warning: rgb(99, 36, 36);
+}
+
+*,
+*::before,
+*::after {
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+
+    display: grid;
+
+    grid:
+        /* this is for the first row, split into 4 columns, all used for header, auto is for the height of the row */
+        "header header header header" auto
+        /* this is the second row, the dots show empty columns, height is auto, the slash symbolizes that columns are next */
+        "...... lists  active ....." auto /
+        /* how big is each column as we look down on them? see below. */
+        /* 1fr = one fraction, just uses the available space, fr = whatever is left over - 1fr means they will have the same size (left and right),
+        minmax gives you a min and max space setting*/
+        1fr minmax(100px, 300px) minmax(250px, 500px) 1fr
+}
+
+/* stopped at 16:30 */
+/* https://www.youtube.com/watch?v=IhmSidOJSeE */
