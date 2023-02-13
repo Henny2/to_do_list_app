@@ -5,6 +5,8 @@
     --clr-warning: rgb(99, 36, 36);
 }
 
+/* watch video on rem and em difference */
+
 *,
 *::before,
 *::after {
@@ -33,5 +35,111 @@ body {
         1fr minmax(100px, 300px) minmax(250px, 500px) 1fr
 }
 
-/* stopped at 16:30 */
+.title {
+    grid-area: header;
+    text-align: center;
+    font-size: calc(7vw + 2rem);
+    font-weight: 900;
+    color: rgba(0, 0, 0, .1);
+    letter-spacing: 1px;
+    margin: -.1em 0 0 0.5em;
+}
+
+.all-tasks {
+    grid-area: lists;
+}
+
+.task-list {
+    /* could also use margins on line items but this is cleaner */
+    line-height: 1.7;
+    font-size: 1.2rem;
+    list-style: circle;
+    padding-left: 1.1em;
+}
+
+form {
+    /* to change order in which button and input appear visually */
+    display: flex;
+}
+
+.btn {
+    cursor: pointer;
+    background: 0;
+    border: 0;
+    padding: 0;
+    color: inherit;
+}
+
+.btn.create {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-right: .25em;
+    transition: opactiy 250ms ease-in;
+}
+
+.btn.create:hover {
+    opacity: .7;
+}
+
+.active-list {
+    font-weight: 700;
+}
+
+/* "new" goes for both forms */
+.new {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    border-bottom: 1px solid currentColor;
+    font-size: inherit;
+    /* to show the user that they clicked into the input box */
+    outline: none;
+    transition: border-bottom 150ms ease-in;
+    /* Together with display:flex. Order property: items are placed in the visual order according to that integer, lowest values first.  */
+    order: 2;
+}
+
+/* to show the user that they clicked into the input box, we thicken the line and drop the opacity of the placeholder */
+.new:focus {
+    border-bottom-width: 3px;
+}
+
+.new:focus::placeholder {
+    opacity: 0.4;
+}
+
+.new.list {
+    font-size: 1.1rem;
+}
+
+.todo-list {
+    /* you can create local variables also within sub sections/not jsut at the root */
+    --spacer: 2rem;
+    grid-area: active;
+    background: var(--clr-light);
+    color: var(--clr-dark);
+
+
+}
+
+.todo-header {
+    background: #e4e4e4;
+    padding: var(--spacer);
+}
+
+
+.list-title {
+    margin: 0;
+}
+
+.task-count {
+    margin: 0;
+}
+
+.todo-body {
+    padding: var(--spacer);
+}
+
+
+/* stopped at  34:00 */
 /* https://www.youtube.com/watch?v=IhmSidOJSeE */
