@@ -57,6 +57,14 @@ body {
     padding-left: 1.1em;
 }
 
+.list-name {
+    cursor: pointer;
+}
+
+.list-name:hover {
+    opacity: .7;
+}
+
 form {
     /* to change order in which button and input appear visually */
     display: flex;
@@ -125,21 +133,61 @@ form {
 .todo-header {
     background: #e4e4e4;
     padding: var(--spacer);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 
 .list-title {
-    margin: 0;
+    margin: 0 1em 0 0;
 }
 
 .task-count {
     margin: 0;
+    font-size: 1rem;
 }
 
 .todo-body {
     padding: var(--spacer);
 }
 
+/* hiding check boxes */
+/* this way you can still tab through and select them */
+/* in contrast to if you would use display:none */
+[type='checkbox'] {
+    opacity: 0;
+    position: absolute;
+}
 
-/* stopped at  34:00 */
+.task label {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 1.25em;
+}
+
+.task label::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -50%;
+    height: 2px;
+    background: currentColor;
+    opacity: .1;
+}
+
+.custom-checkbox {
+    --size: .75em;
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    cursor: pointer;
+    margin-right: var(--size);
+    border: 2px solid currentColor;
+    border-radius: 50%;
+}
+
+/* stopped at  41:00 */
 /* https://www.youtube.com/watch?v=IhmSidOJSeE */
