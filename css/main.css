@@ -89,7 +89,7 @@ form {
     opacity: .7;
 }
 
-.btn-delete {
+.btn.delete {
     /* font-weight: 700;
     letter-spacing: 1px; */
     opacity: .7;
@@ -97,7 +97,7 @@ form {
     transform: color 200ms;
 }
 
-.btn-delete:hover {
+.btn.delete:hover {
     color: var(--clr-warning);
 }
 
@@ -117,6 +117,7 @@ form {
     transition: border-bottom 150ms ease-in;
     /* Together with display:flex. Order property: items are placed in the visual order according to that integer, lowest values first.  */
     order: 2;
+    padding: .25em;
 }
 
 /* to show the user that they clicked into the input box, we thicken the line and drop the opacity of the placeholder */
@@ -124,8 +125,13 @@ form {
     border-bottom-width: 3px;
 }
 
+.new::placeholder {
+    opacity: .4;
+    color: inherit;
+}
+
 .new:focus::placeholder {
-    opacity: 0.4;
+    opacity: 0.15;
 }
 
 .new.list {
