@@ -89,6 +89,18 @@ form {
     opacity: .7;
 }
 
+.btn-delete {
+    /* font-weight: 700;
+    letter-spacing: 1px; */
+    opacity: .7;
+    font-size: 1rem;
+    transform: color 200ms;
+}
+
+.btn-delete:hover {
+    color: var(--clr-warning);
+}
+
 .active-list {
     font-weight: 700;
 }
@@ -118,6 +130,10 @@ form {
 
 .new.list {
     font-size: 1.1rem;
+}
+
+.new.task {
+    margin-bottom: 0;
 }
 
 .todo-list {
@@ -150,7 +166,26 @@ form {
 
 .todo-body {
     padding: var(--spacer);
+    position: relative;
 }
+
+
+.new-task-creator .create {
+    color: var(--clr-primary);
+
+}
+
+.delete-stuff {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -35px;
+    color: var(--clr-light);
+}
+
+
 
 /* hiding check boxes */
 /* this way you can still tab through and select them */
@@ -239,5 +274,5 @@ form {
 
 
 
-/* stopped at  53:00 */
+/* stopped at  1:00:00 */
 /* https://www.youtube.com/watch?v=IhmSidOJSeE */
