@@ -21,31 +21,10 @@ listContainer.addEventListener('click', e => {
 })
 
 deleteListButton.addEventListener('click', e => {
-    console.log('delete list')
-    console.log(lists)
-    console.log(selectedListId)
-    // let listPosition = null
-    // lists.forEach((list, index) => {
-    //     if (list.id === selectedListId) {
-    //         listPosition = index
-    //     }
-    // })
-    // console.log(listPosition)
-    deleteSelectedList()
-})
-
-function deleteSelectedList() {
-    localStorage.removeItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY)
-    let listPosition = null
-    lists.forEach((list, index) => {
-        if (list.id === selectedListId) {
-            listPosition = index
-        }
-    })
-    lists.splice(listPosition, 1)
+    lists = lists.filter(list => list.id !== selectedListId)
+    selectedListId = null
     saveAndRender()
-    // render()
-}
+})
 
 newListForm.addEventListener('submit', e => {
     // stop page from refreshing because it would delete all the lists and not submit the form
