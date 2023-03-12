@@ -8,6 +8,7 @@ let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || []
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId' //saving info on selected list in localStorage
 // get from localstorage if possible
 let selectedListId = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY))
+const deleteListButton = document.querySelector('[data-delete-list-button]')
 
 // we dynamically add lists, so adding event listeners for the onClick is more complicated
 // our solution: we add a listener to the whole container that they are in 
@@ -19,6 +20,32 @@ listContainer.addEventListener('click', e => {
     }
 })
 
+deleteListButton.addEventListener('click', e => {
+    console.log('delete list')
+    console.log(lists)
+    console.log(selectedListId)
+    // let listPosition = null
+    // lists.forEach((list, index) => {
+    //     if (list.id === selectedListId) {
+    //         listPosition = index
+    //     }
+    // })
+    // console.log(listPosition)
+    deleteSelectedList()
+})
+
+function deleteSelectedList() {
+    localStorage.removeItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY)
+    let listPosition = null
+    lists.forEach((list, index) => {
+        if (list.id === selectedListId) {
+            listPosition = index
+        }
+    })
+    lists.splice(listPosition, 1)
+    saveAndRender()
+    // render()
+}
 
 newListForm.addEventListener('submit', e => {
     // stop page from refreshing because it would delete all the lists and not submit the form
@@ -68,6 +95,8 @@ function clearElement(element) {
         element.removeChild(element.firstChild)
     }
 }
+
+
 
 render()
 // stopped tutorial at 17;57
