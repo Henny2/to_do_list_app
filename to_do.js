@@ -1,6 +1,12 @@
 const listContainer = document.querySelector('[data-lists]')
 const newListForm = document.querySelector('[data-new-list-form]')
-const newListInput = document.querySelector('[data-new-list-input]')
+const deleteListButton = document.querySelector('[data-delete-list-button]')
+const listDisplayContainer = document.querySelector('[data-list-display-container]')
+const listTitleElement = document.querySelector('[data-list-title]')
+const listCountElement = document.querySelector('[data-list-count]')
+const tasksContainer = document.querySelector('[data-tasks]')
+
+
 // using local storage to store the information in the user's browser
 const LOCAL_STORAGE_LIST_KEY = 'task.list' // making a namespace, so that our local storage won't be overwritten
 // get list from local storage, if not exist give me an empty array
@@ -8,8 +14,6 @@ let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || []
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId' //saving info on selected list in localStorage
 // get from localstorage if possible
 let selectedListId = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY))
-const deleteListButton = document.querySelector('[data-delete-list-button]')
-
 // we dynamically add lists, so adding event listeners for the onClick is more complicated
 // our solution: we add a listener to the whole container that they are in 
 listContainer.addEventListener('click', e => {
@@ -78,5 +82,5 @@ function clearElement(element) {
 
 
 render()
-// stopped tutorial at 17;57
-// next up: create delete function
+// stopped tutorial at 21:30
+// next up: render tasks
