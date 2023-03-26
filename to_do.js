@@ -1,5 +1,6 @@
 const listContainer = document.querySelector('[data-lists]')
 const newListForm = document.querySelector('[data-new-list-form]')
+const newListInput = document.querySelector('[data-new-list-input]')
 const deleteListButton = document.querySelector('[data-delete-list-button]')
 const listDisplayContainer = document.querySelector('[data-list-display-container]')
 const listTitleElement = document.querySelector('[data-list-title]')
@@ -39,6 +40,7 @@ newListForm.addEventListener('submit', e => {
     newListInput.value = null
     lists.push(list)
     saveAndRender()
+    console.log('Submit list')
 
 })
 
@@ -60,6 +62,19 @@ function save() {
 
 function render() {
     clearElement(listContainer)
+    renderLists()
+    const selectedList = lists.find(list => list.id === selectedListId)
+    // check whether and what tasks to display
+    if (selectedListId == null) {
+        listDisplayContainer.style.display = 'none'
+    }
+    else {
+        listDisplayContainer.style.display = ''
+        listTitleElement.innerText = selectedList.name
+    }
+}
+
+function renderLists() {
     lists.forEach(list => {
         const listElement = document.createElement('li')
         listElement.dataset.listId = list.id
