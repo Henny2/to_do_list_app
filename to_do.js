@@ -162,5 +162,4 @@ function clearElement(element) {
 
 
 render()
-// stopped tutorial at 21:30
-// next up: render tasks
+// https://www.youtube.com/watch?v=W7FaYfuwu70
