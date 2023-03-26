@@ -6,7 +6,10 @@ const listDisplayContainer = document.querySelector('[data-list-display-containe
 const listTitleElement = document.querySelector('[data-list-title]')
 const listCountElement = document.querySelector('[data-list-count]')
 const tasksContainer = document.querySelector('[data-tasks]')
-
+const taskTemplate = document.getElementById('task-template')
+const newTaskForm = document.querySelector('[data-new-task-form]')
+const newTaskInput = document.querySelector('[data-new-task-input]')
+const clearCompleteTasksButton = document.querySelector('[data-clear-complete-tasks-button]')
 
 // using local storage to store the information in the user's browser
 const LOCAL_STORAGE_LIST_KEY = 'task.list' // making a namespace, so that our local storage won't be overwritten
@@ -31,6 +34,26 @@ deleteListButton.addEventListener('click', e => {
     saveAndRender()
 })
 
+clearCompleteTasksButton.addEventListener('click', e => {
+    const selectedList = lists.find(list => list.id === selectedListId)
+    selectedList.tasks = selectedList.tasks.filter(task => !task.complete)
+    saveAndRender()
+})
+
+tasksContainer.addEventListener('click', e => {
+    // it is equal to 'input' when we click on the checkbox within the container
+    if (e.target.tagName.toLowerCase() === 'input') {
+        const selectedList = lists.find(list => list.id === selectedListId)
+        // when we create the task we set the checkbox id to euqal the task id, that's why this works
+        const selectedTask = selectedList.tasks.find(task => task.id === e.target.id)
+        // e.taget.checked will be true or false depending on whether the checkbox is checked or not
+        selectedTask.complete = e.target.checked
+        // don't do a saveAndRender here because the only thing that needs to be rerendered is the count, so just calling its function
+        save()
+        renderTaskCount(selectedList)
+    }
+})
+
 newListForm.addEventListener('submit', e => {
     // stop page from refreshing because it would delete all the lists and not submit the form
     e.preventDefault()
@@ -44,9 +67,29 @@ newListForm.addEventListener('submit', e => {
 
 })
 
-function createList(name) {
-    return { id: Date.now().toString(), name: name, tasks: [] }
+newTaskForm.addEventListener('submit', e => {
+    // stop page from refreshing because it would delete all the lists and not submit the form
+    e.preventDefault()
+    const taskName = newTaskInput.value
+    if (taskName === null || taskName === '') return
+    const task = createTask(taskName)
+    newTaskInput.value = null
+    const selectedList = lists.find(list => list.id === selectedListId)
+    selectedList.tasks.push(task)
+    saveAndRender()
+})
 
+
+
+function createList(name) {
+    return {
+        id: Date.now().toString(), name: name, tasks: []
+    }
+}
+function createTask(name) {
+    return {
+        id: Date.now().toString(), name: name, complete: false
+    }
 }
 
 function saveAndRender() {
@@ -71,7 +114,29 @@ function render() {
     else {
         listDisplayContainer.style.display = ''
         listTitleElement.innerText = selectedList.name
+        renderTaskCount(selectedList)
+        clearElement(tasksContainer)
+        renderTasks(selectedList)
     }
+}
+function renderTaskCount(selectedList) {
+    // GET THE NUMBER OF UNFINISHED TASKS
+    const incompleteTasksCount = selectedList.tasks.filter(task => !task.complete).length
+    const taskString = incompleteTasksCount === 1 ? "task" : "tasks"
+    listCountElement.innerText = `${incompleteTasksCount} ${taskString} remaining`
+}
+function renderTasks(selectedList) {
+    selectedList.tasks.forEach(task => {
+        // without the true, it would only import the first line
+        const taskElement = document.importNode(taskTemplate.content, true)
+        const checkbox = taskElement.querySelector('input')
+        checkbox.id = task.id
+        checkbox.checked = task.complete
+        const label = taskElement.querySelector('label')
+        label.htmlFor = task.id
+        label.append(task.name)
+        tasksContainer.appendChild(taskElement)
+    })
 }
 
 function renderLists() {
